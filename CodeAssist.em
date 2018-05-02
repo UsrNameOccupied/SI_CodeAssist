@@ -169,7 +169,7 @@ macro get_func_line_tokens(str, delim, tokens)
   angle_brackets_finished = True
 
   while(index < strlen(str)) {
-    delim_index = 0;
+    delim_index = 0
 
     if(str[index] == "<") {
       angle_brackets_finished = False
@@ -189,11 +189,11 @@ macro get_func_line_tokens(str, delim, tokens)
         if((index + 1) <= (strlen(str) - 1)) {
           str = strmid(str, index + 1, strlen(str))
           index = -1
-          break;
+          break
         } else {
           // ignore the last character
           str = ""
-          break;
+          break
         }
       }
       delim_index = (delim_index + 1)
@@ -207,7 +207,7 @@ macro get_func_line_tokens(str, delim, tokens)
     AppendBufLine(token_statements, str)
   }
 
-  index = 0;
+  index = 0
   count = GetBufLineCount(token_statements)
 
   while(index < count) {
