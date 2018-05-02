@@ -265,6 +265,26 @@ macro generate_function_comment()
   InsBufLine(curr_file, ln, " */")
 }
 
+// string compare
+macro string_compare(str1, str2) {
+	if(strlen(str1) != strlen(str2)) {
+		return False
+	}
+
+	index = 0
+
+	while (index < strlen(str1)) {
+		ch = str1[index]
+		if(ch != str2[index]) {
+			return False
+		}
+
+		index = index + 1
+	}
+
+	return True
+}
+
 // complete code while match special abbreviation
 macro code_complete() {
   curr_file = GetCurrentBuf()
