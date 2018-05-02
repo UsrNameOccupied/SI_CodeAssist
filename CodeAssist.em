@@ -109,7 +109,8 @@ macro insert_file_header() {
     InsBufLine(hbuf, LnFirst++, "")
 }
 
-macro insert_function_header() {
+macro insert_function_header() {
+
 	hbuf = GetCurrentBuf()
 	declaration_line = GetBufLnCur(hbuf)
 	sym_info = GetSymbolLocationFromLn(hbuf, declaration_line)
@@ -137,3 +138,11 @@ macro string_compare(str1, str2) {
 	return True
 }
 
+// open the directory of current file 
+macro open_curr_dir() {
+	buf = GetCurrentBuf();
+	curFilePath = GetBufName(buf);
+	cmdLine = "explorer.exe /select,@curFilePath@";
+
+	RunCmdLine(cmdLine, Nil, 0);
+}
