@@ -267,22 +267,22 @@ macro generate_function_comment()
 
 // string compare
 macro string_compare(str1, str2) {
-	if(strlen(str1) != strlen(str2)) {
-		return False
-	}
+  if(strlen(str1) != strlen(str2)) {
+    return False
+  }
 
-	index = 0
+  index = 0
 
-	while (index < strlen(str1)) {
-		ch = str1[index]
-		if(ch != str2[index]) {
-			return False
-		}
+  while (index < strlen(str1)) {
+    ch = str1[index]
+    if(ch != str2[index]) {
+      return False
+    }
 
-		index = index + 1
-	}
+    index = index + 1
+  }
 
-	return True
+  return True
 }
 
 // complete code while match special abbreviation
@@ -333,19 +333,19 @@ macro code_complete() {
   } else if(string_compare(abbr, "iter")) {
     name = Ask("Please input your variable name that to be iterated!")
 
-	statement = cat("for (", name);
-	statement = cat(statement, "_it");
-	statement = cat(statement, " = ");
-	statement = cat(statement, name);
-	statement = cat(statement, ".begin(); ");
-	statement = cat(statement, name);
-	statement = cat(statement, " = ");
-	statement = cat(statement, name);
-	statement = cat(statement, ".end(); ");
-	statement = cat(statement, name);
-	statement = cat(statement, "_it++");
-	statement = cat(statement, ") {");
-	
+    statement = cat("for (", name);
+    statement = cat(statement, "_it");
+    statement = cat(statement, " = ");
+    statement = cat(statement, name);
+    statement = cat(statement, ".begin(); ");
+    statement = cat(statement, name);
+    statement = cat(statement, " = ");
+    statement = cat(statement, name);
+    statement = cat(statement, ".end(); ");
+    statement = cat(statement, name);
+    statement = cat(statement, "_it++");
+    statement = cat(statement, ") {");
+
     PutBufLine(curr_file, ln, statement)
     ln = ln + 1 
     InsBufLine(curr_file, ln, "}")
