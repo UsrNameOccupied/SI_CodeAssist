@@ -330,5 +330,24 @@ macro code_complete() {
     InsBufLine(curr_file, ln, "   break;")
     ln = ln + 1 
     InsBufLine(curr_file, ln, " }")
+  } else if(string_compare(abbr, "iter")) {
+    name = Ask("Please input your variable name that to be iterated!")
+
+	statement = cat("for (", name);
+	statement = cat(statement, "_it");
+	statement = cat(statement, " = ");
+	statement = cat(statement, name);
+	statement = cat(statement, ".begin(); ");
+	statement = cat(statement, name);
+	statement = cat(statement, " = ");
+	statement = cat(statement, name);
+	statement = cat(statement, ".end(); ");
+	statement = cat(statement, name);
+	statement = cat(statement, "_it++");
+	statement = cat(statement, ") {");
+	
+    PutBufLine(curr_file, ln, statement)
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, "}")
   }
 }
