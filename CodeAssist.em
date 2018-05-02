@@ -162,7 +162,7 @@ macro token_parser(token_line) {
 macro get_func_line_tokens(str, delim, tokens)
 {
   // array, spilt function line into pieces
-  token_statements = NewBuf("token_statements");
+  token_statements = NewBuf("token_statements")
 
   index = 0
   delim_len = strlen(delim)
@@ -182,7 +182,7 @@ macro get_func_line_tokens(str, delim, tokens)
         // if substring is not empty
         if(index > 0) {
           substring = strmid(str, 0, index)
-          AppendBufLine(token_statements, substring);
+          AppendBufLine(token_statements, substring)
         }
 
         // if have remaining
@@ -196,24 +196,24 @@ macro get_func_line_tokens(str, delim, tokens)
           break;
         }
       }
-      delim_index = (delim_index + 1);
+      delim_index = (delim_index + 1)
     }
 
-    index++;
+    index = index + 1
   }
 
   // if no delim found, whole string put into array
   if(strlen(str) > 0 && index == strlen(str)) {
-    AppendBufLine(token_statements, str);
+    AppendBufLine(token_statements, str)
   }
 
   index = 0;
-  count = GetBufLineCount(token_statements);
+  count = GetBufLineCount(token_statements)
 
   while(index < count) {
-    content = GetBufLine(token_statements, index);
+    content = GetBufLine(token_statements, index)
     token = token_parser(content)
-    AppendBufLine(tokens, token);
+    AppendBufLine(tokens, token)
     index = index + 1
   }
 
@@ -226,30 +226,30 @@ macro get_func_line_tokens(str, delim, tokens)
 macro generate_function_comment()
 {
   // array
-  tokens = NewBuf("tokens");
+  tokens = NewBuf("tokens")
   delim = ",;{}()"
 
   curr_file = GetCurrentBuf()
   ln = GetBufLnCur(curr_file)
-  func_line = GetBufLine(curr_file, ln);
+  func_line = GetBufLine(curr_file, ln)
 
-  InsBufLine(curr_file, ln, "/**");
+  InsBufLine(curr_file, ln, "/**")
   ln = ln + 1 
-  InsBufLine(curr_file, ln, " * \@brief");
+  InsBufLine(curr_file, ln, " * \@brief")
 
   get_func_line_tokens(func_line, delim , tokens)
 
   // iterate tokens
   // we assume that the first token is the function name and it's return type
-  index = 1;
-  count = GetBufLineCount(tokens);
+  index = 1
+  count = GetBufLineCount(tokens)
 
   while(index < count) {
-    token = GetBufLine(tokens, index);
+    token = GetBufLine(tokens, index)
 
     if(token != Nil) {
       ln = ln + 1 
-      InsBufLine(curr_file, ln, cat(" * \@param ", token.name));
+      InsBufLine(curr_file, ln, cat(" * \@param ", token.name))
     }
 
     index = index + 1
@@ -258,9 +258,9 @@ macro generate_function_comment()
   CloseBuf(tokens)
 
   ln = ln + 1 
-  InsBufLine(curr_file, ln, " * \@warning");
+  InsBufLine(curr_file, ln, " * \@warning")
   ln = ln + 1 
-  InsBufLine(curr_file, ln, " * \@return");
+  InsBufLine(curr_file, ln, " * \@return")
   ln = ln + 1 
-  InsBufLine(curr_file, ln, " */");
+  InsBufLine(curr_file, ln, " */")
 }
