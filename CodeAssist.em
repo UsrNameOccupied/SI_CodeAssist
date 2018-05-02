@@ -264,3 +264,51 @@ macro generate_function_comment()
   ln = ln + 1 
   InsBufLine(curr_file, ln, " */")
 }
+
+// complete code while match special abbreviation
+macro code_complete() {
+  curr_file = GetCurrentBuf()
+  ln = GetBufLnCur(curr_file)
+  // get abbreviation
+  abbr = GetBufLine(curr_file, ln)
+  // trim blank space
+  abbr = trim(abbr)
+
+  if(string_compare(abbr, "for")) { 
+    PutBufLine(curr_file, ln, " for (size_t i = 0; i < ; i++) {")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " }")
+  } else if(string_compare(abbr, "do")) {
+    PutBufLine(curr_file, ln, " do {")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " } while();")
+  } else if(string_compare(abbr, "#ifdef")) {
+    name = Ask("Please input your macro name!")
+
+    PutBufLine(curr_file, ln, cat(" #ifdef", name))
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, cat(" #endif", name))
+  } else if(string_compare(abbr, "if")) {
+    PutBufLine(curr_file, ln, " if () {")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " }")
+  } else if(string_compare(abbr, "ifel")) {
+    PutBufLine(curr_file, ln, " if () {")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " } else {")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " }")
+  } else if(string_compare(abbr, "switch")) {
+    PutBufLine(curr_file, ln, " switch () {")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " case :")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, "   break;")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " default:")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, "   break;")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " }")
+  }
+}
