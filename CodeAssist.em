@@ -351,3 +351,13 @@ macro code_complete() {
     InsBufLine(curr_file, ln, "}")
   }
 }
+
+// duplicate current line
+macro duplicate_curr_line() {
+  curr_file = GetCurrentBuf()
+  ln = GetBufLnCur(curr_file)
+  // get current line
+  content = GetBufLine(curr_file, ln)
+  ln = ln + 1 
+  InsBufLine(curr_file, ln, content)
+}
