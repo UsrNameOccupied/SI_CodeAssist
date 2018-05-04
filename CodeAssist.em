@@ -339,7 +339,8 @@ macro code_complete() {
     statement = cat(statement, name);
     statement = cat(statement, ".begin(); ");
     statement = cat(statement, name);
-    statement = cat(statement, " = ");
+    statement = cat(statement, "_it");
+    statement = cat(statement, " != ");
     statement = cat(statement, name);
     statement = cat(statement, ".end(); ");
     statement = cat(statement, name);
