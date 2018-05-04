@@ -350,6 +350,22 @@ macro code_complete() {
     PutBufLine(curr_file, ln, statement)
     ln = ln + 1 
     InsBufLine(curr_file, ln, "}")
+  } else if(string_compare(abbr, "class")) {
+    name = Ask("Please input your class name that to be iterated!")
+    
+    PutBufLine(curr_file, ln, " class " # name # "{ ")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " public:")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, "  " # name # "();")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, "  ~" # name # "();")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " private:")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " private:")
+    ln = ln + 1 
+    InsBufLine(curr_file, ln, " };")
   }
 }
 
